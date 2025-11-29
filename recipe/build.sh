@@ -1,12 +1,12 @@
 #!/bin/bash
 set -ex
 
-# Check if we are cross-compiling by trying to run the host python
-if ! $PYTHON --version > /dev/null 2>&1; then
-    echo "Cross-compiling detected: $PYTHON is not runnable."
-    PYTHON_CMD="$BUILD_PREFIX/bin/python"
-    # Use build python to install into host prefix
-    $PYTHON_CMD -m pip install . -vv --no-deps --no-build-isolation --prefix "$PREFIX"
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; then
+  echo "Cross-compiling detected."
+  # Use build python to drive installation
+  # We point pip to install into the target prefix
+  $BUILD_PREFIX/bin/python -m pip install . -vv --no-deps --no-build-isolation --prefix "$PREFIX"
 else
-    $PYTHON -m pip install . -vv --no-deps --no-build-isolation
+  # Native build
+  $PYTHON -m pip install . -vv --no-deps --no-build-isolation
 fi
