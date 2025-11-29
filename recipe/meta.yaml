@@ -12,7 +12,7 @@ source:
 build:
   number: 0
   script:
-    - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
+    # - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
     - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
@@ -20,7 +20,7 @@ requirements:
     - {{ compiler("cxx") }}
     - {{ compiler("rust") }}
     - {{ stdlib("c") }}
-    - cargo-bundle-licenses
+    # - cargo-bundle-licenses
     - pip               # [build_platform != target_platform]
     - python            # [build_platform != target_platform]
     - maturin >=1.0,<2  # [build_platform != target_platform]
@@ -44,7 +44,7 @@ about:
   summary: A fast, simple and lightweight Bloom filter library for Python, implemented in Rust
   license: MIT
   license_file:
-    - THIRDPARTY.yml
+    # - THIRDPARTY.yml
     - LICENSE
 
 extra:
