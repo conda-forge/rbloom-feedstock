@@ -18,9 +18,9 @@ requirements:
     - {{ compiler("rust") }}
     - {{ stdlib("c") }}
     # - cargo-bundle-licenses
-    - pip               # [build_platform != target_platform]
-    - python            # [build_platform != target_platform]
-    - maturin >=1.0,<2  # [build_platform != target_platform]
+    - pip
+    - python
+    - maturin >=1.0,<2
   host:
     - pip
     - python

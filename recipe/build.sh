@@ -5,21 +5,16 @@ echo "CONDA_BUILD_CROSS_COMPILATION=${CONDA_BUILD_CROSS_COMPILATION:-}"
 echo "target_platform=${target_platform:-}"
 echo "build_platform=${build_platform:-}"
 echo "uname -m=$(uname -m)"
+echo "PYTHON=${PYTHON}"
+echo "Which python: $(which python)"
 
-IS_CROSS=0
-if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; then
-  IS_CROSS=1
-elif [[ "$target_platform" == "osx-arm64" && "$(uname -m)" == "x86_64" ]]; then
-  IS_CROSS=1
-fi
-
-if [[ "$IS_CROSS" == "1" ]]; then
-  echo "Cross-compiling detected."
-  # Use build python to drive installation
-  # We point pip to install into the target prefix
-  # We use 'python' from PATH which should be the build python (from requirements: build)
-  python -m pip install . -vv --no-deps --no-build-isolation --prefix "$PREFIX"
+# Check if we can run the host python
+if $PYTHON --version > /dev/null 2>&1; then
+    echo "Host python is runnable. Using it."
+    $PYTHON -m pip install . -vv --no-deps --no-build-isolation
 else
-  # Native build
-  $PYTHON -m pip install . -vv --no-deps --no-build-isolation
+    echo "Host python is NOT runnable. Cross-compiling."
+    # Fallback to 'python' in PATH, which should be the build python
+    # We point pip to install into the target prefix
+    python -m pip install . -vv --no-deps --no-build-isolation --prefix "$PREFIX"
 fi
