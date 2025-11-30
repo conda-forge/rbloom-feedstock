@@ -20,6 +20,37 @@ requirements:
     # - cargo-bundle-licenses
     - pip
     - python
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - maturin >=1.0,<2
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - maturin >=1.0,<2
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - maturin >=1.0,<2
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - maturin >=1.0,<2
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - maturin >=1.0,<2
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - maturin >=1.0,<2
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - maturin >=1.0,<2
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - maturin >=1.0,<2
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - maturin >=1.0,<2
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - maturin >=1.0,<2
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - maturin >=1.0,<2
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - maturin >=1.0,<2
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - maturin >=1.0,<2
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - maturin >=1.0,<2
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - maturin >=1.0,<2
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - maturin >=1.0,<2
   host:
     - pip
@@ -35,6 +66,10 @@ test:
     - pip check
   requires:
     - pip
+  # Skip tests when cross-compiling
+  skip: true  # [build_platform != target_platform]
+  skip: true  # [osx and arm64]
+  skip: true  # [osx and arm64]
 
 about:
   home: https://github.com/KenanHanke/rbloom
