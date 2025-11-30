@@ -17,41 +17,11 @@ requirements:
     - {{ compiler("cxx") }}
     - {{ compiler("rust") }}
     - {{ stdlib("c") }}
-    # - cargo-bundle-licenses
-    - pip
-    - python
+    - cargo-bundle-licenses
+    - pip                                    # [build_platform != target_platform]
+    - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - maturin >=1.0,<2
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - maturin >=1.0,<2
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - maturin >=1.0,<2
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - maturin >=1.0,<2
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - maturin >=1.0,<2
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - maturin >=1.0,<2
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - maturin >=1.0,<2
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - maturin >=1.0,<2
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - maturin >=1.0,<2
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - maturin >=1.0,<2
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - maturin >=1.0,<2
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - maturin >=1.0,<2
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - maturin >=1.0,<2
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - maturin >=1.0,<2
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - maturin >=1.0,<2
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - maturin >=1.0,<2
+    - maturin >=1.0,<2                       # [build_platform != target_platform]
   host:
     - pip
     - python
@@ -66,17 +36,13 @@ test:
     - pip check
   requires:
     - pip
-  # Skip tests when cross-compiling
-  skip: true  # [build_platform != target_platform]
-  skip: true  # [osx and arm64]
-  skip: true  # [osx and arm64]
 
 about:
   home: https://github.com/KenanHanke/rbloom
   summary: A fast, simple and lightweight Bloom filter library for Python, implemented in Rust
   license: MIT
   license_file:
-    # - THIRDPARTY.yml
+    - THIRDPARTY.yml
     - LICENSE
 
 extra:
