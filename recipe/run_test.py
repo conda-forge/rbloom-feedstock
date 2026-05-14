@@ -2,21 +2,30 @@ from rbloom import Bloom
 
 
 def main():
-    bloom = Bloom(100, 0.01)
-    bloom.add("robot")
+    bloom = Bloom(1000, 0.0001)
+    bloom.update(["robot", "simulation"])
 
     assert "robot" in bloom
-    assert "simulation" not in bloom
-    assert bloom.approx_items >= 1
+    assert "simulation" in bloom
 
     copied = bloom.copy()
     assert "robot" in copied
+    assert copied.issubset(bloom)
 
-    other = Bloom(100, 0.01)
-    other.add("simulation")
-    union = bloom.union(other)
+    bloom.clear()
+    assert "robot" not in bloom
+
+    other = Bloom(1000, 0.0001)
+    other.add("planning")
+    union = copied.union(other)
     assert "robot" in union
     assert "simulation" in union
+    assert "planning" in union
+    assert union.issuperset(copied)
+
+    intersection = union.intersection(copied)
+    assert "robot" in intersection
+    assert "simulation" in intersection
 
 
 if __name__ == "__main__":
