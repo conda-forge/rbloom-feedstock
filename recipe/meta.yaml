@@ -36,6 +36,9 @@ test:
     - rbloom
   commands:
     - pip check
+    - python run_test.py
+  files:
+    - run_test.py
   requires:
     - pip
 
