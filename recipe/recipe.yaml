@@ -16,7 +16,7 @@ build:
   number: 2
   script:
     - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
-    - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    - python -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:
@@ -26,6 +26,7 @@ requirements:
     - cargo-bundle-licenses
     - if: build_platform != target_platform
       then:
+        - cross-python_${{ target_platform }}
         - pip
         - python
         - maturin >=1.0,<2
