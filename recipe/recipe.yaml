@@ -40,14 +40,15 @@ tests:
   - python:
       imports:
         - rbloom
-      pip_check: true
   - script:
+      - pip check
       - python run_test.py
     files:
       recipe:
         - run_test.py
     requirements:
       run:
+        - pip
         - python
 
 about:
