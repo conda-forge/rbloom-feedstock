@@ -9,6 +9,8 @@ Package license: MIT
 
 Summary: A fast, simple and lightweight Bloom filter library for Python, implemented in Rust
 
+Development: https://github.com/KenanHanke/rbloom
+
 Current build status
 ====================
 

@@ -1,0 +1,66 @@
+schema_version: 1
+
+context:
+  name: rbloom
+  version: "1.5.4"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: ea6804f837c14d8ff041b07df8666798ac1ddcab709e139d06b0ea69d627f827
+
+build:
+  number: 2
+  script:
+    - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
+    - python -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler("cxx") }}
+    - ${{ compiler("rust") }}
+    - ${{ stdlib("c") }}
+    - cargo-bundle-licenses
+    - if: build_platform != target_platform
+      then:
+        - cross-python_${{ target_platform }}
+        - pip
+        - python
+        - maturin >=1.0,<2
+  host:
+    - pip
+    - python
+    - maturin >=1.0,<2
+  run:
+    - python
+
+tests:
+  - python:
+      imports:
+        - rbloom
+  - script:
+      - pip check
+      - python run_test.py
+    files:
+      recipe:
+        - run_test.py
+    requirements:
+      run:
+        - pip
+        - python
+
+about:
+  homepage: https://github.com/KenanHanke/rbloom
+  repository: https://github.com/KenanHanke/rbloom
+  summary: A fast, simple and lightweight Bloom filter library for Python, implemented in Rust
+  license: MIT
+  license_file:
+    - THIRDPARTY.yml
+    - LICENSE
+
+extra:
+  recipe-maintainers:
+    - jeongseok-meta
